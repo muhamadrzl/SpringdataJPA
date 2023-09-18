@@ -44,6 +44,8 @@ class ProductRepositoryTest {
         product.setDescription("updated product 1 desc");
 
         productRepository.save(product);
+//        System.out.println(savedObject2.getId());
+//        System.out.println(savedObject2.toString());
     }
 
     @Test
@@ -71,5 +73,27 @@ class ProductRepositoryTest {
         product3.setImageUrl("product3.png");
 
         productRepository.saveAll(List.of(product,product3));
+    }
+
+    @Test
+    void findAllMethod(){
+        List<Product> products = productRepository.findAll();
+        products.forEach((product)->{
+            System.out.println(product.getName());
+        });
+    }
+
+    @Test
+    void deleteByIdMethod(){
+        Long id = 1L;
+        productRepository.deleteById(id);
+    }
+
+    @Test
+    void deleteMethod(){
+        Long id = 2L;
+        Product product = productRepository.findById(id).get();
+
+        productRepository.delete(product);
     }
 }
